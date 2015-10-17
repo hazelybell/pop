@@ -1,0 +1,2 @@
+public class Result := (Object or RuntimeException)
+	# This is the default base class for all other classes

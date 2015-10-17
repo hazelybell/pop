@@ -1,0 +1,21 @@
+begin public class Exception isa Object
+	KnownString description
+	KnownLocation at
+	
+	public constructor raise
+		(KnownLocation where) to (this)
+		at := where
+		description := ""
+	end constructor
+
+	public constructor raise
+		(KnownLocation where, KnownString why) to (this)
+		at := where
+		description := why
+	end constructor
+
+	public function what
+		(this) to (KnownString return)
+		return := at . ": " . description
+	end function
+end class
