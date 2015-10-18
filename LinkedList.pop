@@ -1,4 +1,4 @@
-public Class LinkedList := Object . begin
+public Class LinkedList := Object & begin
 	documentation
 		This is an implementation of a "linked list"-like data structure which is a simple
 		recursive data structure with some example methods. This is just example code, and
