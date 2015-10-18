@@ -15,4 +15,10 @@ begin public class Exception isa Object
 	public function this.what() to (KnownString return)
 		return := at . ": " . description
 	end function
+
+	public function this.description() := this.what()
+
+	public function this.isRuntime() to (KnownBoolean return)
+		return := FALSE
+	end function
 end class

@@ -1,1 +1,7 @@
 public class RuntimeException isa Exception
+
+begin class RuntimeException
+	public function this.isRuntime() to (KnownBoolean return)
+		return := TRUE
+	end function
+end class

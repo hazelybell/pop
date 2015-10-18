@@ -1,0 +1,10 @@
+Known isa Object
+begin public class Known
+	begin public function this.equals(Object that) to KnownBoolean
+		return FALSE
+	end function
+
+	begin public function this.description()
+		return this.class.name() . "@" . this.machineAddress
+	end function
+end class

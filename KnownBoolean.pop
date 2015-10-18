@@ -1,0 +1,3 @@
+public class TRUE isa Object
+public class FALSE isa Object
+public class KnownBoolean isa (TRUE or FALSE)

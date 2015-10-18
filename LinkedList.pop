@@ -1,21 +1,21 @@
 begin public class LinkedList
-	public class Terminator
+	public class Terminator isa Object
 	
 	public class Link := Terminator or LinkedList
 
-	field Link next
-	field Object data
+	Link next
+	Object data
 
 	begin public constructor new
 		(Object initialData) to this
-		next <- Terminator
-		data <- initialData
+		next := Terminator
+		data := initialData
 	end constructor
 
 	begin public constructor new
 		(Object initialData, LinkedList initialNext) to this
-		next <- initialNext
-		data <- initialData
+		next := initialNext
+		data := initialData
 	end constructor
 	
 	begin public accessor this(Natural index) to (Object return)
@@ -45,5 +45,13 @@ begin public class LinkedList
 	begin public function this.pop to this, (LinkedList return)
 		return := LinkedList.new(initialData=data)
 		this <- this.getNext()
+	end function
+
+	begin public function this.length to (Natural return)
+		if next isa LinkedList
+			return := next.length + 1
+		else
+			return := 0
+		end if
 	end function
 end class

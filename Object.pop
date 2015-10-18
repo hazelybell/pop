@@ -1,0 +1,3 @@
+begin public class Object isa PopObject
+	public function equals(Object)
+end class
