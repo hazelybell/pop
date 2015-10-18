@@ -25,3 +25,4 @@
 * no pointers EVER
 * everything single-assignment (final) by default, programmer must explicitly ask for mutability
 * pass-by-value
+* interchangable brackets: ((1+2)/3) is the same as ([1 + 2]/3)
