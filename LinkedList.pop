@@ -1,5 +1,5 @@
-begin public class LinkedList
-	begin documentation
+public Class LinkedList := Object . begin
+	documentation
 		This is an implementation of a "linked list"-like data structure which is a simple
 		recursive data structure with some example methods. This is just example code, and
 		probably should not be used in practice, because it is a highly inefficient data
@@ -7,18 +7,18 @@ begin public class LinkedList
 		in Python.
 	end documentation
 	
-	begin comment
+	comment
 		This is an example block-style comment, like /* */ in C. It will be attached to the
 		class it is in in the AST.
 	end comment
 
-	public class Terminator isa Object 
+	public Class Terminator := Object
 		# A complete class definition! 
 		# Terminator is a subclass of Object, overriding nothing and adding nothing.
 		# These comments will all be concatentated and attached to the preceding line (as if # were a
 		# left-associative operator) in the AST.
 	
-	public class Link := (Terminator or LinkedList) 
+	public Class Link := (Terminator or LinkedList) 
 		# Build a tagged union class by operator
 		# immutable (the assignment is done at compile time)
 
@@ -29,22 +29,20 @@ begin public class LinkedList
 	field Link this.next 
 		# field indicates that it is a mutable instance attribute 
 
-	begin public constructor new
-		(Object initialData) to this 
+	public Constructor new(Object initialData) to this := begin
 			# to this indicates it returns an instance
-		next := Terminator   
+		this.next := Terminator   
 			# Immutable attributes that weren't initialized at
 			# compile time must be initialized in the constructor
-		data := initialData
-	end constructor
+		this.data := initialData
+	end 
 
-	begin public constructor new
-		(Object initialData, LinkedList initialNext) to this
+	public Constructor new(Object initialData, LinkedList initialNext) to this := begin
 		next := initialNext
 		data := initialData
-	end constructor
+	end
 	
-	begin public accessor this(Natural index) to (Object return)
+	public Accessor this(Natural index) to (Object return) := begin
 		# this() defines behaviour when used like an array, similarly to overriding __getitem__
 		# in Python. this[] may also be used with no change in semantics.
 		if index == 0 # to prevent confusion there is no = operator
@@ -52,25 +50,24 @@ begin public class LinkedList
 		else
 			return := next(index - 1)
 		end if
-	end function
+	end
 
-	begin public function this.insertBefore(Object newData) to this
+	public Function this.insertBefore(Object newData) to this := begin
 		# "this to this" indicates we modify this
 		# "this.functionName" indicates an instance function not a class function
 		this <- LinkedList.new(initialData : newData, initialNext : this)
 		# functions with more than one argument (apart from "this") must be specified by keyword
-	end function
+	end
 	
-	public function push := insertBefore
+	public Function push := insertBefore
 		# simple aliases
 
-	begin public function this.insertAfter(Object newData) to this
+	public Function this.insertAfter(Object newData) to this := begin
 		next.insertBefore(newData) # because insertBefore modifies this, it can only be called on mutable
 			# variables or fields
-		
-	end function
+	end
 
-	begin public function this.getNext() to (LinkedList return)
+	public Function this.getNext() to (LinkedList return) := begin
 		# this function is "pure," and we can tell because it doesn't take any of the same
 		# arguments as it outputs
 		if next isa LinkedList
@@ -80,33 +77,33 @@ begin public class LinkedList
 			return := EndOfListException.raise(here) # return an exception instead
 				# which we can do because we inherit from Result
 		end if
-	end function
+	end
 	
-	begin public function this.getData() to (Object return)
+	public Function this.getData() to (Object return) := begin
 		# an example simple getter
 		return := data
-	end function
+	end
 
-	begin public function this.pop to this, (LinkedList return)
+	public Function this.pop to this, (LinkedList return) := begin
 		# Example of a function which modifies "this" and also returns extra data
 		return := LinkedList.new(initialData=data)
 		this <- this.getNext()
-	end function
+	end
 
-	begin public function this.length to (Natural return)
+	public Function this.length to (Natural return) := begin
 		if next isa LinkedList
 			return := next.length + 1
 			# Once all of the named returned data are assigned we can stop executing
 		else
 			return := 0
 		end if
-	end function
+	end
 	
-	begin test
+	test pushPop := begin
 		# example unit test
 		variable LinkedList list <- LinkedList.new("first data item")
 		list.push("second data item")
 		assert(list.pop.getData() == "second data item")
 		assert(list.getData() == "first data item")
-	end test
-end class
+	end
+end
