@@ -1,7 +1,7 @@
 begin public class LinkedList
 	public class Terminator isa Object
 	
-	public class Link := Terminator or LinkedList
+	public class Link := (Terminator or LinkedList)
 
 	Link next
 	Object data
