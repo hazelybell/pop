@@ -1,29 +1,24 @@
 begin public class LinkedList
-	private field LinkedList next
-	private field Object data
-
 	public class Terminator
+	
+	public class Link := Terminator or LinkedList
+
+	field Link next
+	field Object data
 
 	begin public constructor new
-		() to (this)
-		next <- new()
-		object <- Terminator.new()
-	end constructor
-
-	begin public constructor new
-		(Object initialData) to (this)
-		next <- new()
+		(Object initialData) to this
+		next <- Terminator
 		data <- initialData
 	end constructor
 
 	begin public constructor new
-		(Object initialData, LinkedList initialNext) to (this)
+		(Object initialData, LinkedList initialNext) to this
 		next <- initialNext
 		data <- initialData
 	end constructor
 	
-	begin public function LinkedList
-		(this, Natural index) to (Object return)
+	begin public accessor this(Natural index) to (Object return)
 		if index == 0
 			return := data
 		else
@@ -31,18 +26,24 @@ begin public class LinkedList
 		end if
 	end function
 
-	begin public function insertBefore
-		(this, Object newData) to (this)
-		this <- LinkedList.new(newData, this)
+	begin public function this.insertBefore(Object newData) to this
+		this <- LinkedList.new(initialData=newData, initialNext=this)
 	end function
 
-	begin public function insertAfter
-		(this, Object newData) to (this)
+	begin public function this.insertAfter(Object newData) to this
 		next.insertBefore(newData)
 	end function
 
-	begin public function getNext
-		(this) to (LinkedList return)
-		return := next
+	begin public function this.getNext to (LinkedList)
+		if next isa LinkedList
+			return := next asa LinkedList
+		else
+			return := EndOfListException.new(here)
+		end if
+	end function
+
+	begin public function this.pop to this, (LinkedList return)
+		return := LinkedList.new(initialData=data)
+		this <- this.getNext()
 	end function
 end class
