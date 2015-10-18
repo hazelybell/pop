@@ -60,6 +60,9 @@ begin public class LinkedList
 		this <- LinkedList.new(initialData : newData, initialNext : this)
 		# functions with more than one argument (apart from "this") must be specified by keyword
 	end function
+	
+	public function push := insertBefore
+		# simple aliases
 
 	begin public function this.insertAfter(Object newData) to this
 		next.insertBefore(newData) # because insertBefore modifies this, it can only be called on mutable
@@ -78,6 +81,11 @@ begin public class LinkedList
 				# which we can do because we inherit from Result
 		end if
 	end function
+	
+	begin public function this.getData() to (Object return)
+		# an example simple getter
+		return := data
+	end function
 
 	begin public function this.pop to this, (LinkedList return)
 		# Example of a function which modifies "this" and also returns extra data
@@ -93,4 +101,12 @@ begin public class LinkedList
 			return := 0
 		end if
 	end function
+	
+	begin test
+		# example unit test
+		variable LinkedList list <- LinkedList.new("first data item")
+		list.push("second data item")
+		assert(list.pop.getData() == "second data item")
+		assert(list.getData() == "first data item")
+	end test
 end class
