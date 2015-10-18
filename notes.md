@@ -8,7 +8,7 @@
 
 # Design Goals
 
-* do not the programmer to consider evaluation order except as written, line by line, in a procedure
+* do not force the programmer to consider evaluation order except as written, line by line, in a procedure
 * minimize the amount the programmer must consider side effects
 * Object-oriented (data object oriented anyway)
 * Data types are defined with their (basic) operations
