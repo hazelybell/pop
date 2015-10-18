@@ -1,10 +1,12 @@
-# Desired Features
+# Desired Compiler Features / Tools
 
 * change the language of all the reserved words in a program to a different language.
 * reformat a program automatically for nice whitespace.
 * have lots of compile-time assertions which the compiler may or may not ignore by using "note:" pragmas.
 * keep the comments in the AST.
-* compute type bounds at compile time.
+* compute (query) type bounds at compile time.
+* compute (query) function reverse-dependencies at compile time.
+* compute (query) dead code.
 
 # Design Goals
 
