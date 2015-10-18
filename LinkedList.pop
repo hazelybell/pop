@@ -1,4 +1,9 @@
 begin public class LinkedList
+	begin documentation
+		This is an implementation of a "linked-list"-like data structure which is a simple
+		recursive data structure with some example methods.
+	end documentation
+
 	public class Terminator isa Object
 	
 	public class Link := (Terminator or LinkedList)
